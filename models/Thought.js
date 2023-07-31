@@ -1,4 +1,6 @@
 const { Schema, model } = require('mongoose');
+const dayjs = require("dayjs");
+const reactionSchema = require('./Reaction')
 
 // thoughtSchema must include thoughtText, createdAt, username, and reactions
 const thoughtSchema = new Schema(
@@ -12,7 +14,7 @@ const thoughtSchema = new Schema(
         createdAt: {
             type: Date,
             default: Date.now,
-            get:// TO-DO: JavaScript date library to format date timestamp
+            get: newDate => dayjs(newDate).format('MMM D, YYYY h:mm A')
         },
         username: {
             type: String,
@@ -30,7 +32,7 @@ const thoughtSchema = new Schema(
 );
 
 // virtual() method to get reactionCount
-userSchema.virtual('reactionCount').get(function () {
+thoughtSchema.virtual('reactionCount').get(function () {
     return this.reactions.length;
 });
 
