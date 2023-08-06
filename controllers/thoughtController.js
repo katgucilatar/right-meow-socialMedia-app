@@ -1,12 +1,6 @@
 const { ObjectId } = require('mongoose').Types;
 const { Thought, User } = require('../models');
 
-// reactionCount function created using aggregate method
-const reactionCount = async () => {
-    // Your code here
-    const numberOfReactions = await Thought.aggregate();
-    return numberOfReactions;
-  };
 
 module.exports = {
     // Get all thoughts
@@ -14,8 +8,7 @@ module.exports = {
       try {
         const thoughts = await Thought.find();
         const thoughtObj = {
-          thoughts,
-          reactionCount: await reactionCount(),
+          thoughts
         };
         return res.json(thoughtObj);
       } catch (err) {
@@ -71,7 +64,7 @@ module.exports = {
       },
 
     // Delete thought
-    async deleteThought(req, res) {
+    async removeThought(req, res) {
       try {
         const thought = await Thought.findOneAndRemove({
           _id: req.params.thoughtId,

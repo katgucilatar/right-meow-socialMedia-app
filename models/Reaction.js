@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose');
+const { Types, Schema, model } = require('mongoose');
 const dayjs = require("dayjs");
 
 // reactionSchema must include reactionId, reactionBody, username, createdAt

@@ -1,21 +1,13 @@
 const { ObjectId } = require('mongoose').Types;
 const { User, Thought } = require('../models');
 
-// friendCount function created using aggregate method
-const friendCount = async () => {
-    // Your code here
-    const numberOfFriends = await User.aggregate();
-    return numberOfFriends;
-  };
-
 module.exports = {
     // Get all users
     async getUsers(req, res) {
       try {
         const users = await User.find();
         const userObj = {
-          users,
-          friendCount: await friendCount(),
+          users
         };
         return res.json(userObj);
       } catch (err) {
